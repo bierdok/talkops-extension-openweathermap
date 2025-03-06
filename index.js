@@ -5,7 +5,7 @@ const extension = new Extension("OpenWeatherMap");
 extension.setDockerRepository("bierdok/talkops-extension-openweathermap");
 
 extension.setDescription(`
-This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to *get weather forecasts, nowcasts* by voice in realtime**.
+This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to **get weather forecasts, nowcasts by voice in realtime**.
 
 Features:
 * Current weather
