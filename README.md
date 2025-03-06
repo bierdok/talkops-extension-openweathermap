@@ -1,13 +1,20 @@
-# TalkOps Extension: Boilerplate NodeJS
+# TalkOps Extension: OpenWeatherMap
+![Docker Pulls](https://img.shields.io/docker/pulls/bierdok/talkops-extension-openweathermap)
 
 A TalkOps Extension made to work with [TalkOps](https://link.talkops.app/talkops).
 
-This Extension serves as a boilerplate designed to assist Node.js developers in effortlessly creating and integrating their own extensions.
+This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to *get weather forecasts, nowcasts* by voice in realtime**.
+
+Features:
+* Current weather
+* Forecasts for the next 5 days
 
 ## Installation Guide
 
 _[TalkOps](https://link.talkops.app/install-talkops) must be installed beforehand._
 
+* [Create an account](https://home.openweathermap.org/users/sign_up)
+* [Generate an API key](https://home.openweathermap.org/api_keys)
 
 ## Integration Guide
 
@@ -19,12 +26,36 @@ name: talkops
 
 services:
 ...
-  talkops-extension-boilerplate-nodejs:
-    image: ghcr.io/talkops/talkops-boilerplate-nodejs
+  talkops-extension-openweathermap:
+    image: bierdok/talkops-extension-openweathermap
+    environment:
+      API_KEY: [your-value]
+      DEFAULT_LOCATION: [your-value]
     restart: unless-stopped
 ```
 
 ## Environment Variables
+
+#### API_KEY
+
+The copied API key.
+
+#### DEFAULT_LOCATION
+
+The default location.
+* Possible values: `New York` `Geneva, Swiss` `Boussoulet, France (45.0294° N, 4.1229° E)`
+
+#### LANGUAGE
+
+The language.
+* Default value: `English`
+* Available values: `Albanian` `Afrikaans` `Arabic` `Azerbaijani` `Basque` `Belarusian` `Bulgarian` `Catalan` `Chinese Simplified` `Chinese Traditional` `Croatian` `Czech` `Danish` `Dutch` `English` `Finnish` `French` `Galician` `German` `Greek` `Hebrew` `Hindi` `Hungarian` `Icelandic` `Indonesian` `Italian` `Japanese` `Korean` `Kurmanji (Kurdish)` `Latvian` `Lithuanian` `Macedonian` `Norwegian` `Persian (Farsi)` `Polish` `Portuguese` `Português Brasil` `Romanian` `Russian` `Serbian` `Slovak` `Slovenian` `Spanish` `Spanish` `Swedish` `Swedish` `Thai` `Turkish` `Ukrainian` `Ukrainian` `Vietnamese` `Zulu`
+
+#### TEMPERATURE_UNIT
+
+The temperature unit to defined unit of measurement.
+* Default value: `Kelvin`
+* Available values: `Celsius` `Fahrenheit` `Kelvin`
 
 #### AGENT_URLS
 
