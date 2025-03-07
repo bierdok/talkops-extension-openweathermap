@@ -8,8 +8,8 @@ extension.setDescription(`
 This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to **get weather forecasts, nowcasts by voice in realtime**.
 
 Features:
-* Current weather
-* Forecasts for the next 5 days
+* Weather nowcasts
+* Weather forecasts for the next 5 days
 `);
 
 extension.setInstallationGuide(`
@@ -23,7 +23,11 @@ extension.setEnvironmentVariables({
   },
   DEFAULT_LOCATION: {
     description: "The default location.",
-    possibleValues: ["New York", "Geneva, Swiss", "Boussoulet, France (45.0294° N, 4.1229° E)"],
+    possibleValues: [
+      "New York",
+      "Geneva, Swiss",
+      "Boussoulet, France (45.0294° N, 4.1229° E)",
+    ],
   },
   LANGUAGE: {
     description: "The language.",
@@ -86,7 +90,8 @@ extension.setInstructions(() => {
 extension.setFunctionSchemas([
   {
     name: "get_current_weather",
-    description: "Get current weather. Don't provide scientific data except for temperature and wind unless specifically requested.",
+    description:
+      "Get current weather. Don't provide scientific data except for temperature and wind unless specifically requested.",
     parameters: {
       type: "object",
       properties: {
@@ -104,7 +109,8 @@ extension.setFunctionSchemas([
   },
   {
     name: "get_forecast",
-    description: "Get weather forecast for 5 days with data every 3 hours. Don't provide scientific data except for temperature and wind unless specifically requested.",
+    description:
+      "Get weather forecast for 5 days with data every 3 hours. Don't provide scientific data except for temperature and wind unless specifically requested.",
     parameters: {
       type: "object",
       properties: {
@@ -133,7 +139,6 @@ async function request(endpoint, latitude, longitude) {
   const url = `${endpoint}?${new URLSearchParams(parameters).toString()}`;
   try {
     const response = await api.get(url);
-    // delete response.data.city;
     return response.data;
   } catch (err) {
     extension.errors = [err.message];

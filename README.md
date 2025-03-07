@@ -6,8 +6,8 @@ A TalkOps Extension made to work with [TalkOps](https://link.talkops.app/talkops
 This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to **get weather forecasts, nowcasts by voice in realtime**.
 
 Features:
-* Current weather
-* Forecasts for the next 5 days
+* Weather nowcasts
+* Weather forecasts for the next 5 days
 
 ## Installation Guide
 
