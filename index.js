@@ -97,11 +97,11 @@ extension.setFunctionSchemas([
       properties: {
         latitude: {
           type: "string",
-          description: "The latitude.",
+          description: "The latitude of the location.",
         },
         longitude: {
           type: "string",
-          description: "The longitude.",
+          description: "The longitude of the location.",
         },
       },
       required: ["latitude", "longitude"],
@@ -116,11 +116,11 @@ extension.setFunctionSchemas([
       properties: {
         latitude: {
           type: "string",
-          description: "The latitude.",
+          description: "The latitude of the location.",
         },
         longitude: {
           type: "string",
-          description: "The longitude.",
+          description: "The longitude of the location.",
         },
       },
       required: ["latitude", "longitude"],
