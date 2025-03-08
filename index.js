@@ -8,8 +8,8 @@ extension.setDescription(`
 This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to **get weather forecasts, nowcasts by voice in realtime**.
 
 Features:
-* Weather nowcasts
-* Weather forecasts for the next 5 days
+* Current weather
+* Forecasts for the next 5 days
 `);
 
 extension.setInstallationGuide(`
@@ -26,7 +26,7 @@ extension.setEnvironmentVariables({
     possibleValues: [
       "New York",
       "Geneva, Swiss",
-      "Boussoulet, France (45.0294° N, 4.1229° E)",
+      "Paris, France",
     ],
   },
   LANGUAGE: {
@@ -47,6 +47,9 @@ import yaml from "js-yaml";
 import languages from "./parameters/languages.json" assert { type: "json" };
 import units from "./parameters/units.json" assert { type: "json" };
 import outputs from "./parameters/outputs.json" assert { type: "json" };
+
+import getWeatherFunction from "./schemas/functions/get_weather.json" assert { type: "json" };
+import getForecastFunction from "./schemas/functions/get_forecast.json" assert { type: "json" };
 
 const api = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5/",
@@ -87,51 +90,32 @@ extension.setInstructions(() => {
   return instructions;
 });
 
-extension.setFunctionSchemas([
-  {
-    name: "get_current_weather",
-    description:
-      "Get current weather. Don't provide scientific data except for temperature and wind unless specifically requested.",
-    parameters: {
-      type: "object",
-      properties: {
-        latitude: {
-          type: "string",
-          description: "The latitude of the location.",
-        },
-        longitude: {
-          type: "string",
-          description: "The longitude of the location.",
-        },
-      },
-      required: ["latitude", "longitude"],
-    },
-  },
-  {
-    name: "get_forecast",
-    description:
-      "Get weather forecast for 5 days with data every 3 hours. Don't provide scientific data except for temperature and wind unless specifically requested.",
-    parameters: {
-      type: "object",
-      properties: {
-        latitude: {
-          type: "string",
-          description: "The latitude of the location.",
-        },
-        longitude: {
-          type: "string",
-          description: "The longitude of the location.",
-        },
-      },
-      required: ["latitude", "longitude"],
-    },
-  },
-]);
+extension.setFunctionSchemas([getWeatherFunction, getForecastFunction]);
 
-async function request(endpoint, latitude, longitude) {
+// async function requestFromGeoCoordinates(endpoint, latitude, longitude) {
+//   const parameters = {
+//     lat: latitude,
+//     lon: longitude,
+//     lang: language,
+//     units: unit,
+//     appid: process.env.API_KEY,
+//   };
+//   const url = `${endpoint}?${new URLSearchParams(parameters).toString()}`;
+//   try {
+//     const response = await api.get(url);
+//     return response.data;
+//   } catch (err) {
+//     extension.errors = [err.message];
+//     return "Error.";
+//   }
+// }
+
+async function request(endpoint, city, state, country) {
+  const location = [city];
+  state && location.push(state);
+  country && location.push(country);
   const parameters = {
-    lat: latitude,
-    lon: longitude,
+    q: location.join(","),
     lang: language,
     units: unit,
     appid: process.env.API_KEY,
@@ -147,17 +131,17 @@ async function request(endpoint, latitude, longitude) {
 }
 
 extension.setFunctions([
-  async function get_current_weather(latitude, longitude) {
-    return await request("weather", latitude, longitude);
+  // async function get_weather_from_geo_coordinates(latitude, longitude) {
+  //   return await requestFromGeoCoordinates("weather", latitude, longitude);
+  // },
+  // async function get_forecast_from_geo_coordinates(latitude, longitude) {
+  //   return await requestFromGeoCoordinates("forecast", latitude, longitude);
+  // },
+  async function get_weather(city, state, country) {
+    return await request("weather", city, state, country);
   },
-  async function get_forecast(latitude, longitude) {
-    return await request("forecast", latitude, longitude);
-  },
-  async function get_hourly_forecast(latitude, longitude) {
-    return await request("forecast/hourly", latitude, longitude);
-  },
-  async function get_daily_forecast(latitude, longitude) {
-    return await request("forecast/daily", latitude, longitude);
+  async function get_forecast(city, state, country) {
+    return await request("forecast", city, state, country);
   },
 ]);
 

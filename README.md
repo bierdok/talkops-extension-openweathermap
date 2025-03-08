@@ -6,8 +6,8 @@ A TalkOps Extension made to work with [TalkOps](https://link.talkops.app/talkops
 This Extension based on [OpenWeatherMap](https://openweathermap.org/) allows you to **get weather forecasts, nowcasts by voice in realtime**.
 
 Features:
-* Weather nowcasts
-* Weather forecasts for the next 5 days
+* Current weather
+* Forecasts for the next 5 days
 
 ## Installation Guide
 
@@ -43,7 +43,7 @@ The copied API key.
 #### DEFAULT_LOCATION
 
 The default location.
-* Possible values: `New York` `Geneva, Swiss` `Boussoulet, France (45.0294° N, 4.1229° E)`
+* Possible values: `New York` `Geneva, Swiss` `Paris, France`
 
 #### LANGUAGE
 
