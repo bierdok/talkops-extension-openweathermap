@@ -44,12 +44,12 @@ extension.setEnvironmentVariables({
 import axios from "axios";
 import yaml from "js-yaml";
 
-import languages from "./parameters/languages.json" assert { type: "json" };
-import units from "./parameters/units.json" assert { type: "json" };
-import outputs from "./parameters/outputs.json" assert { type: "json" };
+import languages from "./parameters/languages.json" with { type: "json" };
+import units from "./parameters/units.json" with { type: "json" };
+import outputs from "./parameters/outputs.json" with { type: "json" };
 
-import getWeatherFunction from "./schemas/functions/get_weather.json" assert { type: "json" };
-import getForecastFunction from "./schemas/functions/get_forecast.json" assert { type: "json" };
+import getWeatherFunction from "./schemas/functions/get_weather.json" with { type: "json" };
+import getForecastFunction from "./schemas/functions/get_forecast.json" with { type: "json" };
 
 const api = axios.create({
   baseURL: "https://api.openweathermap.org/data/2.5/",
