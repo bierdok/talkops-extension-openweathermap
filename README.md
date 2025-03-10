@@ -32,6 +32,8 @@ services:
       API_KEY: [your-value]
       DEFAULT_LOCATION: [your-value]
     restart: unless-stopped
+
+
 ```
 
 ## Environment Variables
